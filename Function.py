@@ -1,7 +1,22 @@
-from connection import create_connection  # Import the create_connection function
-from mysql.connector import Error
+import mysql.connector
 import hashlib
+from mysql.connector import Error
 
+
+# Function to create a database connection
+def create_connection():
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='DdCya995142@4681',
+            database='ssproject'
+        )
+        return connection
+    except mysql.connector.Error as e:
+        print("Error creating database connection:", str(e))
+        return None
+    
 
 # Function to hash a password using MD5
 def md5_hash_password(password):
@@ -10,7 +25,7 @@ def md5_hash_password(password):
     return md5.hexdigest()
 
 # Function to create a new user account
-def create_user(connection, email, userrole, password):
+def create_user(email, userrole, password):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
@@ -24,7 +39,7 @@ def create_user(connection, email, userrole, password):
         print("Error creating user:", str(e))
 
 # Function to authenticate a user during sign-in
-def authenticate_user(connection, email, password):
+def authenticate_user(email, password):
     try:
         if connection.is_connected():
             cursor = connection.cursor()

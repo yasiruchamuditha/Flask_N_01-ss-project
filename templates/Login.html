@@ -9,11 +9,11 @@
     <title>CHAT ME - Login</title>
     <link rel="icon" type="images/x-icon" href="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-1/177800/01-1024.png" />
 </head>
-<body>
+<body style="background: url(static/images/1.png);">
     {% include 'nav.html' %}
     <div class="container-fluid" id="containerm">
         <h1>LOG IN</h1>
-        <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="#"  onsubmit="return result()" >
+        <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="/LoginMethod"  onsubmit="return result()" >
             <div class="inputfeild mt-3 ">
                 <label class="form-label mb-2">UserEmail:</label>
                 <input type="email" class="form-control" name="txtUSerEmail" id="txtUSerEmail" placeholder="Enter Your UserEmail" onkeyup="validateUserEmail()" >
