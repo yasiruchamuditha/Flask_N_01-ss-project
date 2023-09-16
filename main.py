@@ -1,10 +1,17 @@
-from flask import Flask, render_template ,url_for ,request
+from flask import Flask, flash, render_template ,url_for ,request 
 
 from Function import authenticate_user 
 from Function import create_user 
+import secrets
+
+secret = secrets.token_urlsafe(32)
 
 
 app = Flask(__name__)
+app.secret_key = secret
+
+
+
 
 @app.route("/")
 def index():
@@ -30,7 +37,16 @@ def sendMessage():
 def LoginMethod():
     email = request.form.get('txtUSerEmail')
     password = request.form.get('txtPassword')
-    authenticate_user(email,password)
+    if authenticate_user(email, password):
+        flash('Login successful!', 'success')
+        # Redirect to the HTML page or route where you want to display the feedback message
+        return render_template('/Home.html')
+    else:
+        flash('Login failed. Invalid email or password.', 'error')
+        # Redirect to the HTML page or route where you want to display the feedback message
+        return render_template('/Login.html')
+
+    
 
 
 @app.route("/RegisterMethod", methods=['POST'])
@@ -40,12 +56,19 @@ def SignUpMethod():
     password = request.form.get('txtPassword')
     cpassword = request.form.get('txtConfirm_Password')
 
-    if password==cpassword:
-        create_user(email,userrole,password)
-
-   
-
-
+    if password == cpassword:
+        if create_user(email, userrole, password):
+            flash('Registration successful!', 'success')
+        else:
+            flash('Registration failed. Please try again later.', 'error')
+    else:
+        flash('Password and confirm password do not match. Please try again.', 'error')
+    
+    # Redirect to the HTML page or route where you want to display the feedback message
+    return render_template('/Login.html')
+        
+    
+    
        
 
 if __name__=="__main__":

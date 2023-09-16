@@ -13,19 +13,56 @@
     {% include 'nav.html' %}
     <div class="container-fluid" id="containerm">
         <h1>SIGN UP</h1>
-        <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="/RegisterMethod"  onsubmit="return result()" >
+        <!-- Add the flashed messages code here -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="feedback-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+
+            <script>
+                // Function to show the alert popup
+                function showAlert(message) {
+                    var alertPopup = document.getElementById("alert-popup");
+                    alertPopup.textContent = message;
+                    alertPopup.style.display = "block";
+            
+                    // Hide the popup after 5 seconds (adjust as needed)
+                    setTimeout(function () {
+                        alertPopup.style.display = "none";
+                    }, 5000); // 5000 milliseconds = 5 seconds
+                }
+            
+                // Check if there are flashed messages
+                var messages = document.querySelectorAll(".feedback-messages li");
+                if (messages.length > 0) {
+                    // Display each flashed message as an alert
+                    messages.forEach(function (messageElement) {
+                        showAlert(messageElement.textContent);
+                    });
+                }
+            </script>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Add this to your HTML template -->
+<div id="alert-popup" class="alert-popup"></div>
+
+
+        <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="/RegisterMethod"  >
             <div class="inputfeild mt-3 ">
                 <label class="form-label mb-2">UserEmail:</label>
-                <input type="email" class="form-control" name="txtUSerEmail" id="txtUSerEmail" placeholder="Enter Your UserEmail" onkeyup="validateUserEmail()" >
+                <input type="email" class="form-control" name="txtUSerEmail" id="txtUSerEmail" placeholder="Enter Your UserEmail" >
                 <span id="UserEmail_Error"></span>
             </div>
       
             <div class="inputfeild mt-3" >
                 <label for="UserRole" class="form-label mb-2">I am ..</label>
-                <select name="User_Role"  id="User_Role"  class="role form-control" style="height: 50px;" onkeyup="validate_User_Role()" >
+                <select name="User_Role"  id="User_Role"  class="role form-control" style="height: 50px;">
                     <option selected value="S">Choose..</option>
                     <option value="User">User</option>
-                    <option value="Fuel_Station">Fuel Station</option>
                     <option value="Admin">Admin</option>
                 </select>
                 <span id="UserRole_Error"></span>
@@ -34,7 +71,7 @@
             <div class="inputfeild mt-3">
                 <label class="form-label mb-2">Password:</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" name="txtPassword" id="txtPassword" placeholder="Enter Password" onkeyup="validatePassword()">
+                    <input type="password" class="form-control" name="txtPassword" id="txtPassword" placeholder="Enter Password">
                     <button type="button" class="btn btn-outline-secondary" id="showPasswordBtn">
                         <i class="bx bx-hide show-hide"></i>
                     </button>
@@ -45,7 +82,7 @@
             <div class="inputfeild mt-3">
                 <label class="form-label mb-2">Confirm Password:</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" name="txtConfirm_Password" id="txtConfirm_Password" placeholder="Please Confirm Password" onkeyup="validateConfirm_Password()">
+                    <input type="password" class="form-control" name="txtConfirm_Password" id="txtConfirm_Password" placeholder="Please Confirm Password">
                     <button type="button" class="btn btn-outline-secondary" id="showConfirmPasswordBtn">
                         <i class="bx bx-hide show-hide"></i>
                     </button>
@@ -61,5 +98,6 @@
     </div>
     {% include 'footer.html' %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-rS5pF5siw5S5n5O0z5n5PvFg5F6F5g5l5i5o5f5f5" crossorigin="anonymous"></script>
+
 </body>
 </html>

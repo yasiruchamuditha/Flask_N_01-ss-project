@@ -17,6 +17,7 @@
       {
         "select-name": "off"
       }
-    ]
+    ],
+    "axe/structure": "off"
   }
 }

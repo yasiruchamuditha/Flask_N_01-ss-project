@@ -27,20 +27,43 @@ def md5_hash_password(password):
 # Function to create a new user account
 def create_user(email, userrole, password):
     try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='DdCya995142@4681',
+            database='ss'
+        )
+         
+        #connection = create_connection()  # Replace this with your actual connection code
         if connection.is_connected():
             cursor = connection.cursor()
             hashed_password = md5_hash_password(password)
-            query = "INSERT INTO users (email,userrole, password) VALUES (%s,%s, %s)"
-            data = (email, hashed_password)
+            query = "INSERT INTO users (email, userrole, password) VALUES (%s, %s, %s)"
+            data = (email, userrole, hashed_password)  # Include 'userrole' in data
             cursor.execute(query, data)
             connection.commit()
             print("User account created successfully.")
-    except Error as e:
+            return True  # Return True if user creation is successful
+    except mysql.connector.Error as e:
         print("Error creating user:", str(e))
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close()
+    
+    return False  # Return False if user creation failed
+
 
 # Function to authenticate a user during sign-in
 def authenticate_user(email, password):
     try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='DdCya995142@4681',
+            database='ss'
+        )
+           
         if connection.is_connected():
             cursor = connection.cursor()
             hashed_password = md5_hash_password(password)
@@ -50,32 +73,16 @@ def authenticate_user(email, password):
             user = cursor.fetchone()
             if user:
                 print("Authentication successful. Welcome,", email)
+                return True  # Return True if authentication is successful
             else:
                 print("Authentication failed. Invalid email or password.")
+                return False
     except Error as e:
         print("Error:", str(e))
-
-# login program loop
-def signinmethod(email,password):
-    try:
-        connection = create_connection()  # Call create_connection from the imported module
-        if connection:
-            while True:
-                authenticate_user(connection, email, password)
-
     finally:
-        if connection and connection.is_connected():
+        if connection.is_connected():
+            cursor.close()
             connection.close()
+    
+    return False  # Return False if authentication failed
 
-
-# Main program loop
-def signupmethod(email,userrole,password):
-    try:
-        connection = create_connection()  # Call create_connection from the imported module
-        if connection:
-            while True:
-                create_user(connection, email,userrole, password)
-                
-    finally:
-        if connection and connection.is_connected():
-            connection.close()
