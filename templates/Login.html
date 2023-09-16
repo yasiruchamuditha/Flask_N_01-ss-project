@@ -8,8 +8,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static' , filename = 'css/style.css')}}">
     <title>CHAT ME - LOGIN</title>
     <link rel="icon" type="images/x-icon" href="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-1/177800/01-1024.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet"/>
 </head>
-<body style="background: url(static/images/1.png);">
+<body style="background: url(static/images/3login.png);background-size: cover;">
     {% include 'nav.html' %}
     <div class="container-fluid" id="containerm">
         <h1>LOG IN</h1>
@@ -26,14 +29,14 @@
         {% endif %}
     {% endwith %}
         <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="/LoginMethod"  onsubmit="return result()" >
-            <div class="inputfeild mt-3 ">
+            <div class="inputfeild mt-5 ">
                 <label class="form-label mb-2">UserEmail:</label>
                 <input type="email" class="form-control" name="txtUSerEmail" id="txtUSerEmail" placeholder="Enter Your UserEmail" onkeyup="validateUserEmail()" >
                 <span id="UserEmail_Error"></span>
             </div>
       
           
-            <div class="inputfeild mt-3">
+            <div class="inputfeild mt-5">
                 <label class="form-label mb-2">Password:</label>
                 <div class="input-group">
                     <input type="password" class="form-control" name="txtPassword" id="txtPassword" placeholder="Enter Password" onkeyup="validatePassword()">
@@ -45,9 +48,9 @@
             </div>
 
             <!--Button-->
-            <button type="submit" class="btn btn-outline-primary btn-lg " id="btnSubmit" name="btnSubmit" >Continue</button>
-            <div class="inputfeild mt-3">
-                <P class="form-label">Don't Have a Account? <a href="/register">Register Here</a></P>
+            <button type="submit" class="btn btn-outline-light btn-lg " id="btnSubmit" name="btnSubmit" >Continue</button>
+            <div class="inputfeild mt-5">
+                <P class="form-label" style="font-size: 20px;">Don't  Have  a  Account ? <a href="/register" style="color: darkblue;">Register  Here</a></P>
               </div>
         </form>
         </div>
@@ -66,5 +69,95 @@
           });
       </script>
       {% include 'footer.html' %}
+
+       <!--validation user inputs-->
+    <script type="text/javascript">
+        var UserEmail_Error=document.getElementById('UserEmail_Error'); 
+        var Password_Error=document.getElementById('Password_Error');
+    
+    //validate user Email
+    function validateUserEmail()
+    {
+      var Email = document.getElementById('txtUSerEmail').value.replace(/^\s+|\s+$/g, "");
+      if (Email.length == 0) 
+      {
+        UserEmail_Error.innerHTML='User Email is required.';
+        return false;
+      }
+      else
+      {
+        var emaiPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+       if (!Email.match(emaiPattern))
+       {
+        UserEmail_Error.innerHTML='Please Enter UserEmail in correct format.';
+        return false;
+       }
+       UserEmail_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+      return true;
+      }  
+    }
+    
+    
+    //validate user Password
+    function validatePassword()
+    {
+      var Password=document.getElementById('txtPassword').value.replace(/^\s+|\s+$/g, "");
+    
+      if (Password.length == 0) 
+      {
+        Password_Error.innerHTML='Password is required.';
+        return false;
+      }
+      else
+      {
+        const PasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+       if (!Password.match(PasswordPattern))
+       {
+        Password_Error.innerHTML='Please Enter Password with Numbers,symbols,upper and lower case (minimum 8 characters)';
+        return false;
+       }
+       Password_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+      return true;
+      }  
+    }
+    
+ 
+    function result()
+    {
+      validateUserEmail();
+      validatePassword();
+    
+    if((!validateUserEmail()) || (!validatePassword()))
+    {
+       return false;
+    }
+    }
+    </script>
+
+    
+  <script>
+    // Function to toggle password visibility
+    function togglePasswordVisibility(inputId, buttonId) {
+        const passwordInput = document.getElementById(inputId);
+        const showHideButton = document.getElementById(buttonId);
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            showHideButton.innerHTML = '<i class="bx bx-show show-hide"></i>';
+        } else {
+            passwordInput.type = "password";
+            showHideButton.innerHTML = '<i class="bx bx-hide show-hide"></i>';
+        }
+    }
+
+    // Event listeners for the show/hide buttons
+    document.getElementById("showPasswordBtn").addEventListener("click", function () {
+        togglePasswordVisibility("txtPassword", "showPasswordBtn");
+    });
+
+    document.getElementById("showConfirmPasswordBtn").addEventListener("click", function () {
+        togglePasswordVisibility("txtConfirm_Password", "showConfirmPasswordBtn");
+    });
+</script>
 </body>
 </html>

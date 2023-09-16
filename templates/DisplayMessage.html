@@ -9,12 +9,14 @@
     <title>CHAT ME - DISPALY MESSAGE</title>
     <link rel="icon" type="images/x-icon" href="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-1/177800/01-1024.png" />
 </head>
-<body style="background: url(static/images/1.png);">
+<body style="background: url(static/images/2displayMessage.png);background-size: cover;">
     {% include 'nav.html' %}
-    <div class="container-fluid" id="containerm">
-        <h1>Decryption Result</h1>
+    <div class="container-fluid" id="containerm" style="width: 1200px;">
+        <h1>Decrypted Message</h1>
         {% if decrypted_Message %}
-        <textarea rows="10" cols="50" readonly>{{ decrypted_Message }}</textarea>
+        <div class="form-floating">
+        <textarea class="form-control mt-4" style="height: 350px; width: 550px;"  readonly>{{ decrypted_Message }}</textarea>
+        </div>
         {% else %}
         <p>Decryption failed.</p>
         {% endif %}
@@ -24,5 +26,7 @@
       <!-- Include your Bootstrap JS and any other necessary scripts here -->
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+      </div>
+      {% include 'footer.html' %}
 </body>
 </html>

@@ -12,65 +12,83 @@
 {% include 'nav.html' %}
 
 <!-- Hero Section -->
-<section class="hero bg-primary text-white py-3 px-3">
+<section class="hero bg-primary text-white py-5 px-3">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <h1 class="display-4">Welcome to My Website</h1>
-                <p class="lead">We offer the best solutions for your needs.</p>
-                <a class="btn btn-light btn-lg" href="#" role="button">Learn More</a>
+        <div class="row mx-5">
+            <div class="col-md-6 mt-5 my-5 mx-5">
+                <h1 class="display-4" style="font-weight: bold;">WELCOME TO CHAT ME</h1>
+                <p class="lead" style="font-weight: bold;">We offer the best Security for your Data.</p>
+                <a class="btn btn-light btn-lg" href="/register" role="button">Get Stared</a>
             </div>
-            <div class="col-md-3">
-                <img src="https://via.placeholder.com/400" alt="Hero Image" class="img-fluid rounded-circle">
+            <div class="col-md-2" style="margin-left: 200px;">
+                <img src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-1/177800/01-1024.png" alt="Hero Image" class="img-fluid rounded-circle">
             </div>
         </div>
     </div>
 </section>
 
-<!-- About Section -->
-<section class="about py-2">
+
+<!-- Main Redirection Section -->
+<section class="services bg-light py-2 mt-5">
     <div class="container">
+        <h2 class="text-center">CHAT ME SERVICES</h2>
         <div class="row">
             <div class="col-md-6">
-                <h2>About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio sit amet mauris fermentum, in volutpat justo eleifend. Praesent sit amet odio nec erat lacinia eleifend ut quis tortor.</p>
+                <div class="card" style="height: 550px;">
+                    <img src="https://th.bing.com/th/id/R.10b751b078c48c535588ae6357cdbc26?rik=177DG%2frLz7%2f%2bZw&pid=ImgRaw&r=0" alt="Service 1" class="card-img-top" style="height: 400px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Send Message</h5>
+                        <p class="card-text">Send Message based on User type with data encryption.</p>
+                        <a href="/sendmessage" class="btn btn-primary">Click Here</a>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
-                <img src="https://via.placeholder.com/400" alt="About Us" class="img-fluid">
+                <div class="card" style="height: 550px;">
+                    <img src="https://th.bing.com/th/id/OIP.5rOJ0OpWTPjMMxAb2-xi8wHaE7?pid=ImgDet&rs=1" alt="Service 2" class="card-img-top" style="height: 400px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Check Message</h5>
+                        <p class="card-text">Check Message with CHAT ME Secure Data Environment.</p>
+                        <a href="/login" class="btn btn-primary">Click Here</a>
+                    </div>
+                </div>
             </div>
+      
         </div>
     </div>
 </section>
+
+
 
 <!-- Services Section -->
-<section class="services bg-light py-2">
+<section class="services bg-light py-2 mt-5">
     <div class="container">
-        <h2 class="text-center">Our Services</h2>
+        <h2 class="text-center">CHAT ME SOLUTIONS</h2>
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" alt="Service 1" class="card-img-top">
+                <div class="card" style="height: 350px;">
+                    <img src="https://th.bing.com/th/id/R.7845fc97aebf4df592cb4d815557d5e8?rik=5PXhqoeBc1yskA&pid=ImgRaw&r=0" alt="Service 1" class="card-img-top" style="height: 300px;">
                     <div class="card-body">
-                        <h5 class="card-title">Service 1</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h5 class="card-title">Data Encrypton</h5>
+                        <p class="card-text">Message Encryption using ECC [Elliptic Curve Cryptography] Algorithm.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" alt="Service 2" class="card-img-top">
+                <div class="card" style="height: 350px;">
+                    <img src="https://th.bing.com/th/id/R.07c0b01fc9be757fc9fa9fc37dae21e5?rik=C2hsPXUAQczReA&pid=ImgRaw&r=0&sres=1&sresct=1" alt="Service 2" class="card-img-top" style="height: 300px;">
                     <div class="card-body">
-                        <h5 class="card-title">Service 2</h5>
-                        <p class="card-text">Vivamus lacinia odio sit amet mauris fermentum, in volutpat justo eleifend.</p>
+                        <h5 class="card-title">User Authentication</h5>
+                        <p class="card-text">User Authenticate using strong MD5 Hasing Algorithm.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/200" alt="Service 3" class="card-img-top">
+                <div class="card" style="height: 350px;">
+                    <img src="https://dataintegrationinfo.com/wp-content/uploads/2020/06/MicrosoftTeams-image-1-e1592908726698.png" alt="Service 3" class="card-img-top" style="height: 300px;">
                     <div class="card-body">
-                        <h5 class="card-title">Service 3</h5>
-                        <p class="card-text">Praesent sit amet odio nec erat lacinia eleifend ut quis tortor.</p>
+                        <h5 class="card-title">Data Validation</h5>
+                        <p class="card-text">User Data Validation is used for enhanced the security of Data.</p>
                     </div>
                 </div>
             </div>
@@ -78,35 +96,7 @@
     </div>
 </section>
 
-<!-- Contact Section -->
-<section class="contact py-2">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Contact Us</h2>
-                <p>If you have any questions or inquiries, please feel free to contact us.</p>
-                <form>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <img src="https://via.placeholder.com/400" alt="Contact Image" class="img-fluid">
-            </div>
-        </div>
-    </div>
-</section>
+
 
 {% include 'footer.html' %}
 

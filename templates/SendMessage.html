@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static' , filename = 'css/style.css')}}">
     <link rel="icon" type="images/x-icon" href="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-1/177800/01-1024.png" />
 </head>
-<body  style="background: url(static/images/sm.jpg) no-repeat fixed ;">
+<body  style="background: url(static/images/1sendMessage.png); background-size: cover;">
     {% include 'nav.html' %}
     <div class="container-fluid" id="containerm">
         <h1>SEND MESSAGE</h1>
@@ -27,21 +27,22 @@
       {% endwith %}
 
 
-        <form class="row g-3 needs-validation" name="frmSendMessage" method="POST" autocomplete="off" action="/SendMessageMethod">
-            <div class="form-group mt-3">
+        <form class="row g-3 needs-validation" name="frmSendMessage" method="POST" autocomplete="off" action="/SendMessageMethod" onsubmit="return result()">
+            <div class="form-group inputfeild mt-4">
                 <label class="form-label mt-3" for="textarea">Message:</label>
-                <textarea class="form-control" id="textarea" rows="4" name="textareaMessage"></textarea>
+                <textarea class="form-control" id="textarea" rows="4" name="textareaMessage" onkeyup="validateMessage()"></textarea>
+                <span id="Message_Error"></span>
             </div>
-            <div class="inputfeild mt-3" >
-                <label for="UserRole" class="form-label mb-2">I am ..</label>
-                <select name="User_Role"  id="User_Role"  class="role form-control" style="height: 50px;">
+            <div class="inputfeild mt-4" >
+                <label for="UserRole" class="form-label mb-2">Send To ..</label>
+                <select name="User_Role"  id="User_Role"  class="role form-control" style="height: 50px;" onkeyup="validate_User_Role()">
                     <option selected value="S">Choose..</option>
                     <option value="user">User</option>
                     <option value="admin">Admin</option>
                 </select>
                 <span id="UserRole_Error"></span>
             </div>
-            <button type="submit" class="btn btn-outline-primary btn-lg " id="btnSubmit" name="btnSubmit" >Submit Details</button>
+            <button type="submit" class="btn btn-outline-dark btn-lg " id="btnSubmit" name="btnSubmit" >Submit Details</button>
         </form>
     </div>
     {% include 'footer.html' %}
@@ -58,5 +59,58 @@
              });
          });
      </script>
+
+     <!--validation user inputs-->
+    <script type="text/javascript">
+        var Message_Error=document.getElementById('Message_Error'); 
+        var UserRole_Error = document.getElementById('UserRole_Error');
+    
+    //validate Message
+    function validateMessage()
+    {
+      var Message = document.getElementById('textarea').value.replace(/^\s+|\s+$/g, "");
+      if (Message.length == 0) 
+      {
+        Message_Error.innerHTML='Message is required.';
+        return false;
+      }
+    
+      Message_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i> ';
+      return true;
+      }  
+    
+    //validate user Role
+    function validate_User_Role()
+    {
+    if(document.getElementById("User_Role").value == "S")
+    {
+        UserRole_Error.innerHTML='User Role is required.';
+        return false;
+    }
+       UserRole_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+       return true;
+    }
+      
+    document.getElementById("User_Role").addEventListener("click", function() {
+    
+      if (document.getElementById("User_Role").value != "S") {
+    
+        UserRole_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+      return true;
+    }
+    });
+    
+    
+    function result()
+    {
+      validateMessage();
+      validate_User_Role();
+    
+    if((!validateMessage()) || (!validate_User_Role()) )
+    {
+       return false;
+    }
+    }
+    </script>
 </body>
 </html>

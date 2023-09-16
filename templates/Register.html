@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet"/>
 </head>
-<body>
+<body style="background: url(static/images/4register.png); background-size: cover;">
     {% include 'nav.html' %}
     <div class="container-fluid" id="containerm">
         <h1>SIGN UP</h1>
@@ -53,7 +53,7 @@
         <!-- popup -->
        <div id="alert-popup" class="alert-popup"></div>
 
-        <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="/RegisterMethod" onsubmit="return result()"  >
+        <form class="row g-3 needs-validation" name="frmUserRegistration" method="post" autocomplete="off" action="/RegisterMethod" onsubmit="return result()" >
             <div class="inputfeild mt-3 ">
                 <label class="form-label mb-2">UserEmail:</label>
                 <input type="email" class="form-control" name="txtUSerEmail" id="txtUSerEmail" placeholder="Enter Your UserEmail" onkeyup="validateUserEmail()">
@@ -92,9 +92,9 @@
                 <span id="Confirm_Password_Error"></span>
             </div>
             <!--Button-->
-            <button type="submit" class="btn btn-outline-primary btn-lg " id="btnSubmit" name="btnSubmit" >Submit Details</button>
+            <button type="submit" class="btn btn-outline-secondary btn-lg " id="btnSubmit" name="btnSubmit" >Continue</button>
             <div class="inputfeild mt-3">
-              <P class="form-label">Already a member? <a href="/login">Login Here</a></P>
+              <P class="form-label" style="font-size: 20px;">Already  a  member ? <a href="/login" style="color: darkblue;">Login  Here</a></P>
             </div>
         </form>
     </div>
@@ -126,7 +126,7 @@
         UserEmail_Error.innerHTML='Please Enter UserEmail in correct format.';
         return false;
        }
-       UserEmail_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i> succes';
+       UserEmail_Error.innerHTML = '<i class="fa-regular fa-circle-check"></i> ';
       return true;
       }  
     }
