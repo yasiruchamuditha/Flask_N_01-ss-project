@@ -86,3 +86,37 @@ def authenticate_user(email, password):
     
     return False  # Return False if authentication failed
 
+
+
+# Function to authenticate a user during sign-in
+def find_usertype(email, password):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='DdCya995142@4681',
+            database='ss'
+        )
+           
+        if connection.is_connected():
+            cursor = connection.cursor()
+            hashed_password = md5_hash_password(password)
+            query = "SELECT * FROM users WHERE email = %s AND password = %s"
+            data = (email, hashed_password)
+            cursor.execute(query, data)
+            user = cursor.fetchone()
+            if user:
+                print("Authentication successful. user type is ,", user_type)
+                user_type = user['user_type']
+                return user_type  # Return True if authentication is successful with usertype
+            else:
+                print("Authentication failed. Invalid user type")
+                return False
+    except Error as e:
+        print("Error:", str(e))
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+    
+    return False  # Return False if authentication failed

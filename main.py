@@ -1,7 +1,9 @@
-from flask import Flask, flash, render_template ,url_for ,request 
-
+from flask import Flask, flash, render_template ,url_for ,request ,session
 from Function import authenticate_user 
 from Function import create_user 
+from Function import find_usertype 
+from Encryption import encrypt
+from Decryption import decrypt
 import secrets
 
 secret = secrets.token_urlsafe(32)
@@ -11,11 +13,9 @@ app = Flask(__name__)
 app.secret_key = secret
 
 
-
-
 @app.route("/")
 def index():
-    return render_template('Home.html')
+    return render_template('SendMessage.html')
 
 @app.route("/home")
 def home():
@@ -38,9 +38,15 @@ def LoginMethod():
     email = request.form.get('txtUSerEmail')
     password = request.form.get('txtPassword')
     if authenticate_user(email, password):
-        flash('Login successful!', 'success')
-        # Redirect to the HTML page or route where you want to display the feedback message
-        return render_template('/Home.html')
+        usertype=find_usertype(email,password)
+        decrypted_Message = decrypt(usertype)
+
+        if decrypted_Message  == None:
+            flash('Decryption is  successful!', 'success')
+            print("Decrypted Message in succesful in main body:", decrypted_Message)
+        else:
+            flash('Decryption failed.', 'error')
+            print("Decrypted Message in failed in main body:")
     else:
         flash('Login failed. Invalid email or password.', 'error')
         # Redirect to the HTML page or route where you want to display the feedback message
@@ -67,8 +73,24 @@ def SignUpMethod():
     # Redirect to the HTML page or route where you want to display the feedback message
     return render_template('/Login.html')
         
+
+
+@app.route("/SendMessageMethod", methods=['POST'])
+def MessageMethod():
+    message = request.form.get('textareaMessage').encode()
+    user_type = request.form.get('User_Role')
+    print(message)
+    print(user_type)
+
+    if encrypt(message,user_type):
+        flash('Message encrypted and saved.', 'success')
+    else:
+        flash('Message encryption failed. Please Try Again later.', 'error')
+      
+    # Redirect to the HTML page or route where you want to display the feedback message
+    return render_template('/SendMessage.html')
     
-    
+
        
 
 if __name__=="__main__":

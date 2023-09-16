@@ -13,17 +13,33 @@
     {% include 'nav.html' %}
     <div class="container-fluid" id="containerm">
         <h1>SEND MESSAGE</h1>
-        <form class="row g-3 needs-validation" name="frmSendMessage" method="post" autocomplete="off" action="#">
+                    <!-- Bootstrap Alert Messages -->
+          <!-- Bootstrap Alert Messages -->
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              <div class="alert alert-dismissible fade show" role="alert">
+                  {% for message in messages %}
+                      {{ message }}
+                  {% endfor %}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          {% endif %}
+      {% endwith %}
+
+
+        <form class="row g-3 needs-validation" name="frmSendMessage" method="POST" autocomplete="off" action="/SendMessageMethod">
             <div class="form-group mt-3">
                 <label class="form-label mt-3" for="textarea">Message:</label>
-                <textarea class="form-control" id="textarea" rows="4"></textarea>
+                <textarea class="form-control" id="textarea" rows="4" name="textareaMessage"></textarea>
             </div>
-            <div class="form-group mt-3">
-                <label class="form-label mt-3" for="selectDropdown">Select UserRole:</label>
-                <select class="form-control" id="selectDropdown">
-                    <option value="Admin">Admin</option>
-                    <option value="User">User</option>
+            <div class="inputfeild mt-3" >
+                <label for="UserRole" class="form-label mb-2">I am ..</label>
+                <select name="User_Role"  id="User_Role"  class="role form-control" style="height: 50px;">
+                    <option selected value="S">Choose..</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
                 </select>
+                <span id="UserRole_Error"></span>
             </div>
             <button type="submit" class="btn btn-outline-primary btn-lg " id="btnSubmit" name="btnSubmit" >Submit Details</button>
         </form>
@@ -31,5 +47,16 @@
     {% include 'footer.html' %}
 <!-- Include Bootstrap JS (optional) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+     <!-- Include your Bootstrap JS and any other necessary scripts here -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+     <script>
+         // Automatically close Bootstrap alert messages after 5 seconds
+         $(document).ready(function(){
+             $(".alert").delay(5000).slideUp(200, function() {
+                 $(this).alert('close');
+             });
+         });
+     </script>
 </body>
 </html>
