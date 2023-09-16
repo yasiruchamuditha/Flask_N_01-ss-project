@@ -10,16 +10,21 @@ def compute_shared_secret(private_key_pem, peer_public_key_pem):
 
 # Data Decryption
 def decrypt_message(shared_key, ciphertext):
-    # Use the shared_key as a symmetric key (e.g., for AES decryption)
-    # Here, we use a simple XOR operation for illustration purposes
+    # Use a proper symmetric encryption algorithm here, such as AES
+    # For illustration purposes, this XOR operation is not secure.
+    # Replace it with actual decryption logic.
     decrypted_text = bytes([c ^ k for c, k in zip(ciphertext, shared_key)])
     return decrypted_text
 
 # Load Encrypted Message from File
 def load_encrypted_message(filename):
-    with open(filename, 'rb') as encrypted_file:
-        ciphertext = encrypted_file.read()
-    return ciphertext
+    try:
+        with open(filename, 'rb') as encrypted_file:
+            ciphertext = encrypted_file.read()
+        return ciphertext
+    except FileNotFoundError:
+        print(f"Encrypted message file not found: {filename}")
+        return None
 
 def admin_decrypt(user_type):
     try:
@@ -33,8 +38,12 @@ def admin_decrypt(user_type):
 
         shared_secret = compute_shared_secret(private_key_pem, peer_public_key_pem)
         ciphertext = load_encrypted_message(filename)
-        decrypted_text = decrypt_message(shared_secret, ciphertext)
-        return decrypted_text.decode()
+        
+        if ciphertext is not None:
+            decrypted_text = decrypt_message(shared_secret, ciphertext)
+            return decrypted_text.decode()
+        else:
+            return None
 
     except FileNotFoundError:
         print(f"Key file not found for user type: {user_type}")
@@ -55,8 +64,12 @@ def user_decrypt(user_type):
 
         shared_secret = compute_shared_secret(private_key_pem, peer_public_key_pem)
         ciphertext = load_encrypted_message(filename)
-        decrypted_text = decrypt_message(shared_secret, ciphertext)
-        return decrypted_text.decode()
+        
+        if ciphertext is not None:
+            decrypted_text = decrypt_message(shared_secret, ciphertext)
+            return decrypted_text.decode()
+        else:
+            return None
 
     except FileNotFoundError:
         print(f"Key file not found for user type: {user_type}")
@@ -64,7 +77,6 @@ def user_decrypt(user_type):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return None
-
 
 def decrypt(user_type):    
     if user_type == 'admin':
@@ -80,3 +92,6 @@ def decrypt(user_type):
     else:
         print("Decryption failed in backend.")
         return None
+
+# Example usage
+decrypt('user')  # Replace 'admin' with 'user' or 'invalid' to test different cases

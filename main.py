@@ -38,15 +38,24 @@ def LoginMethod():
     email = request.form.get('txtUSerEmail')
     password = request.form.get('txtPassword')
     if authenticate_user(email, password):
-        usertype=find_usertype(email,password)
-        decrypted_Message = decrypt(usertype)
-
-        if decrypted_Message  == None:
-            flash('Decryption is  successful!', 'success')
-            print("Decrypted Message in succesful in main body:", decrypted_Message)
+        usertype=find_usertype(email)
+        print('usertype checked in main body.',usertype)
+        if usertype is not None:
+            decrypted_Message = decrypt(usertype)
+            if decrypted_Message is not None:
+               flash('Decryption is  successful!', 'success')
+               print("Decrypted Message in succesful in main body:", decrypted_Message)
+               # Pass the decrypted_Message to the template
+               return render_template('DisplayMessage.html', decrypted_Message=decrypted_Message)
+            else:
+               flash('Decryption failed.', 'error')
+               print("Decrypted Message in failed in main body:")
+               return render_template('/Login.html')
+   
         else:
-            flash('Decryption failed.', 'error')
-            print("Decrypted Message in failed in main body:")
+            flash('Login failed. Invalid email or password.', 'error')
+            # Redirect to the HTML page or route where you want to display the feedback message
+            return render_template('/Login.html') 
     else:
         flash('Login failed. Invalid email or password.', 'error')
         # Redirect to the HTML page or route where you want to display the feedback message

@@ -12,12 +12,7 @@
     "meta-viewport": "off",
     "axe/name-role-value": "off",
     "no-inline-styles": "off",
-    "axe/forms": [
-      "default",
-      {
-        "select-name": "off"
-      }
-    ],
+    "axe/forms": "off",
     "axe/structure": "off"
   }
 }
