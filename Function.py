@@ -100,14 +100,14 @@ def find_usertype(email):
            
         if connection.is_connected():
             cursor = connection.cursor()
-            query = "SELECT user_type FROM users WHERE email = %s"
-            data = (email)
+            query = "SELECT userrole FROM users WHERE email = %s"
+            data = (email,)
             cursor.execute(query, data)
-            user_type  = cursor.fetchone()
-            if user_type :
-                user_type = user_type[0]  # Extract the user_type from the tuple
-                print("User type found:", user_type)
-                return user_type  # Return the user_type if found
+            userrole  = cursor.fetchone()
+            if userrole :
+                userrole = userrole[0]  # Extract the user_type from the tuple
+                print("User type found:", userrole)
+                return userrole  # Return the user_type if found
             else:
                 print("Email not found")
                 return None  # Return None if email not found

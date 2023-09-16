@@ -38,10 +38,10 @@ def LoginMethod():
     email = request.form.get('txtUSerEmail')
     password = request.form.get('txtPassword')
     if authenticate_user(email, password):
-        usertype=find_usertype(email)
-        print('usertype checked in main body.',usertype)
-        if usertype is not None:
-            decrypted_Message = decrypt(usertype)
+        userrole=find_usertype(email)
+        print('usertype checked in main body.',userrole)
+        if userrole is not None:
+            decrypted_Message = decrypt(userrole)
             if decrypted_Message is not None:
                flash('Decryption is  successful!', 'success')
                print("Decrypted Message in succesful in main body:", decrypted_Message)
