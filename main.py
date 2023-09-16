@@ -2,37 +2,42 @@ from flask import Flask, flash, render_template ,url_for ,request ,session
 from Function import authenticate_user 
 from Function import create_user 
 from Function import find_usertype 
+from Function import find_user_email 
 from Encryption import encrypt
 from Decryption import decrypt
 import secrets
 
 secret = secrets.token_urlsafe(32)
 
-
 app = Flask(__name__)
 app.secret_key = secret
 
-
+#route for load index page
 @app.route("/")
 def index():
     return render_template('SendMessage.html')
 
+#route for load home page
 @app.route("/home")
 def home():
     return render_template('Home.html')
 
+#route for load register page
 @app.route("/register")
 def register():
     return render_template('Register.html')
 
+#route for load login page
 @app.route("/login")
 def login():
     return render_template('Login.html')
 
+#route for load sendMessage page
 @app.route("/sendmessage")
 def sendMessage():
     return render_template('SendMessage.html')
-    
+
+#route for login form action    
 @app.route("/LoginMethod", methods=['POST'])
 def LoginMethod():
     email = request.form.get('txtUSerEmail')
@@ -62,8 +67,7 @@ def LoginMethod():
         return render_template('/Login.html')
 
     
-
-
+#route for registration form action  
 @app.route("/RegisterMethod", methods=['POST'])
 def SignUpMethod():
     email = request.form.get('txtUSerEmail')
@@ -72,18 +76,26 @@ def SignUpMethod():
     cpassword = request.form.get('txtConfirm_Password')
 
     if password == cpassword:
-        if create_user(email, userrole, password):
-            flash('Registration successful!', 'success')
+        foundEmail = find_user_email(email)
+        if foundEmail is None:
+            if create_user(email, userrole, password):
+                flash('Registration successful! Please login.', 'success')
+                return render_template('/Login.html')
+            else:
+                flash('Registration failed. Please try again later.', 'error')
+                return render_template('/Register.html')  
         else:
-            flash('Registration failed. Please try again later.', 'error')
+            flash('Registration failed. Already have Account under Email', 'error') 
+            return render_template('/Register.html')   
+
     else:
         flash('Password and confirm password do not match. Please try again.', 'error')
     
     # Redirect to the HTML page or route where you want to display the feedback message
-    return render_template('/Login.html')
+    return render_template('/Register.html')
         
 
-
+#route for sendMessage form action  
 @app.route("/SendMessageMethod", methods=['POST'])
 def MessageMethod():
     message = request.form.get('textareaMessage').encode()
@@ -99,8 +111,7 @@ def MessageMethod():
     # Redirect to the HTML page or route where you want to display the feedback message
     return render_template('/SendMessage.html')
     
-
-       
+      
 
 if __name__=="__main__":
     app.run(debug=True)

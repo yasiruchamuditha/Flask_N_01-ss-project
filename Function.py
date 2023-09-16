@@ -10,7 +10,7 @@ def create_connection():
             host='localhost',
             user='root',
             password='DdCya995142@4681',
-            database='ssproject'
+            database='ss'
         )
         return connection
     except mysql.connector.Error as e:
@@ -119,3 +119,39 @@ def find_usertype(email):
             connection.close()
     
     return False  # Return False if authentication failed
+
+
+
+
+
+# Function to find a user's email
+def find_user_email(email):
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='DdCya995142@4681',
+            database='ss'
+        )
+           
+        if connection.is_connected():
+            cursor = connection.cursor()
+            query = "SELECT email FROM users WHERE email = %s"
+            data = (email,)
+            cursor.execute(query, data)
+            email = cursor.fetchone()
+            if email:
+                email = email[0]  # Extract the email from the tuple
+                print("Email found:", email)
+                return email  # Return the email if found
+            else:
+                print("User not found")
+                return None  # Return None if user not found
+    except Error as e:
+        print("Error:", str(e))
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+    
+    return False  # Return None if an error occurred
