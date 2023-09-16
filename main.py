@@ -32,6 +32,11 @@ def register():
 def login():
     return render_template('Login.html')
 
+#route for load About page
+@app.route("/about")
+def about():
+    return render_template('About.html')
+
 #route for load sendMessage page
 @app.route("/sendmessage")
 def sendMessage():
