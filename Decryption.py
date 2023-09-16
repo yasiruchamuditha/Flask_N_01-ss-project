@@ -1,6 +1,10 @@
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 
+
+# @author Yasiru
+# contact me: https://linktr.ee/yasiruchamuditha for more information.
+
 # ECC Key Exchange and Shared Secret Calculation
 def compute_shared_secret(private_key_pem, peer_public_key_pem):
     private_key = serialization.load_pem_private_key(private_key_pem, password=None)
@@ -26,6 +30,7 @@ def load_encrypted_message(filename):
         print(f"Encrypted message file not found: {filename}")
         return None
 
+#admin decrypt method
 def admin_decrypt(userrole):
     try:
         if userrole == 'admin':
@@ -53,7 +58,7 @@ def admin_decrypt(userrole):
         return None
     
     
-
+#user decrypt method
 def user_decrypt(userrole):
     try:
         if userrole == 'user':
@@ -82,7 +87,7 @@ def user_decrypt(userrole):
 
 
 
-
+#Desrypt method based on user role
 def decrypt(userrole):    
     if userrole == 'admin':
         decrypted_text = admin_decrypt(userrole)

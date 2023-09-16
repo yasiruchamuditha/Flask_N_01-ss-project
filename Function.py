@@ -3,6 +3,9 @@ import hashlib
 from mysql.connector import Error
 
 
+# @author Yasiru
+# contact me: https://linktr.ee/yasiruchamuditha for more information.
+
 # Function to create a database connection
 def create_connection():
     try:
@@ -24,6 +27,7 @@ def md5_hash_password(password):
     md5.update(password.encode('utf-8'))
     return md5.hexdigest()
 
+
 # Function to create a new user account
 def create_user(email, userrole, password):
     try:
@@ -34,7 +38,7 @@ def create_user(email, userrole, password):
             database='ss'
         )
          
-        #connection = create_connection()  # Replace this with your actual connection code
+        #connection = create_connection()  
         if connection.is_connected():
             cursor = connection.cursor()
             hashed_password = md5_hash_password(password)
@@ -122,9 +126,7 @@ def find_usertype(email):
 
 
 
-
-
-# Function to find a user's email
+# Function to find a user email during sign-in
 def find_user_email(email):
     try:
         connection = mysql.connector.connect(

@@ -3,7 +3,8 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from KeyGeneration import generate_and_save_admin_keys 
 from KeyGeneration import generate_and_save_user_keys
 
-
+# @author Yasiru
+# contact me: https://linktr.ee/yasiruchamuditha for more information.
 
 # ECC Key Exchange and Shared Secret Calculation
 def compute_shared_secret(private_key_pem, peer_public_key_pem):
@@ -24,7 +25,7 @@ def save_encrypted_message(ciphertext, filename):
     with open(filename, 'wb') as encrypted_file:
         encrypted_file.write(ciphertext)
 
-
+#Encrypt method based on user type
 def encrypt(message,user_type):
     try:
         if user_type == 'admin':
