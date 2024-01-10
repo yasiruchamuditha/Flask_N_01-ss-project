@@ -1,11 +1,11 @@
 from flask import Flask, flash, render_template ,url_for ,request ,session
-from Function import authenticate_user 
-from Function import create_user 
-from Function import find_usertype 
-from Function import find_user_email 
-from Encryption import encrypt
-from Decryption import decrypt
-import secrets
+from resources.Function import authenticate_user 
+from resources.Function import create_user 
+from resources.Function import find_usertype 
+from resources.Function import find_user_email 
+from resources.Encryption import encrypt
+from resources.Decryption import decrypt
+import secrets 
 
 # @author Yasiru
 # contact me: https://linktr.ee/yasiruchamuditha for more information.

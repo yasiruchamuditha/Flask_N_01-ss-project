@@ -1,7 +1,7 @@
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
-from KeyGeneration import generate_and_save_admin_keys 
-from KeyGeneration import generate_and_save_user_keys
+from resources.KeyGeneration import generate_and_save_admin_keys 
+from resources.KeyGeneration import generate_and_save_user_keys
 
 # @author Yasiru
 # contact me: https://linktr.ee/yasiruchamuditha for more information.

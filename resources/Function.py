@@ -1,6 +1,6 @@
-import mysql.connector
-import hashlib
-from mysql.connector import Error
+import mysql.connector #pip install mysql-connector-python
+import hashlib #pip install hashlib
+from mysql.connector import Error #pip install mysql-connector-python
 
 
 # @author Yasiru
@@ -12,7 +12,7 @@ def create_connection():
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='DdCya995142@4681',
+            password='root',
             database='ss'
         )
         return connection
@@ -34,7 +34,7 @@ def create_user(email, userrole, password):
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='DdCya995142@4681',
+            password='root',
             database='ss'
         )
          
@@ -64,7 +64,7 @@ def authenticate_user(email, password):
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='DdCya995142@4681',
+            password='root',
             database='ss'
         )
            
@@ -98,7 +98,7 @@ def find_usertype(email):
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='DdCya995142@4681',
+            password='root',
             database='ss'
         )
            
@@ -132,7 +132,7 @@ def find_user_email(email):
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='DdCya995142@4681',
+            password='root',
             database='ss'
         )
            
